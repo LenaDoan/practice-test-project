@@ -1,5 +1,5 @@
 {
-    "loginUrl": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "loginUrl": "https://www.saucedemo.com/",
     "dashboardUrl": "https://www.saucedemo.com/inventory.html",
     "validUsername": "standard_user",
     "validPassword": "secret_sauce",

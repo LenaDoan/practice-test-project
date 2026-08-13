@@ -19,14 +19,4 @@ export class LoginPage extends BasePage {
         await this.password.fill(pass);
         await this.loginBtn.click();
     }
-
-    async assertInventoryPageVisible(expectedUrl) {
-        await expect(this.page).toHaveURL(expectedUrl);
-        await expect(this.productsTitle).toBeVisible();
-    }
-
-    async assertErrorMessageVisible(expectedText) {
-        await expect(this.errorMessage).toContainText(expectedText);
-        await expect(this.username).toBeVisible();
-    }
 }

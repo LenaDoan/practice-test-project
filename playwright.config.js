@@ -15,7 +15,7 @@ export default defineConfig({
   globalSetup: './global-setup.js',
   //testMatch: ['**/*.test.js', '**/*.spec.js', '**/*-test.js', '**/*-spec.js'],
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -30,8 +30,8 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    video: 'on-first-retry',
+    trace: 'retain-on-failure',
+    video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     storageState: 'playwright/.auth/inventory-auth.json'
   },

@@ -18,6 +18,7 @@ export class InventoryPage extends BasePage {
         this.resetAppStateButton = this.page.getByText('Reset App State');
         this.allItemsMenuOption = this.page.getByText('All Items');
         this.aboutMenuOption = this.page.getByText('About');
+        this.usernameLabel = this.page.getByPlaceholder('Username');
     }
 
     async addProductToCart(item1) {
@@ -60,11 +61,6 @@ export class InventoryPage extends BasePage {
         await this.sortDropdown.selectOption(optionValue);
     }
 
-    async assertInventoryPageVisible() {
-        await expect(this.page).toHaveURL(/inventory/);
-        await expect(this.pageTitle).toBeVisible();
-    }
-
     async assertProductsCount(expectedCount) {
         const actualCount = await this.getInventoryItemCount();
         expect(actualCount, 'Expected the number of inventory products to match the test data').toBe(expectedCount);
@@ -105,10 +101,6 @@ export class InventoryPage extends BasePage {
         await expect(this.cartBadge).toHaveText(String(expectedCount));
     }
 
-    async assertCartBadgeHidden() {
-        await expect(this.cartBadge).toHaveCount(0);
-    }
-
     async assertAddToCartButtonVisible(item1) {
         await expect(this.page.locator(`[data-test="add-to-cart-${item1}"]`)).toBeVisible();
     }
@@ -127,9 +119,5 @@ export class InventoryPage extends BasePage {
         await expect(this.aboutMenuOption).toBeVisible();
         await expect(this.logoutButton).toBeVisible();
         await expect(this.resetAppStateButton).toBeVisible();
-    }
-
-    async assertLoginPageVisible() {
-        await expect(this.page.getByPlaceholder('Username')).toBeVisible();
     }
 }

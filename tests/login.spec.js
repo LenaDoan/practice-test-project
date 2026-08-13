@@ -1,17 +1,22 @@
+import { url } from "node:inspector";
 import { test, expect } from "../fixtures/general-fixture.js";
+
+// Login specs need a logged-out context (ignore global auth storageState)
+test.use({ storageState: { cookies: [], origins: [] } });
 
 test.beforeEach('Navigate to the login page', async ({ page }) => {
     await page.goto(process.env.BASE_URL);
 });
 
 test.describe('Happy path: Login success', () => {
-    test('Login successfully with valid user', async ({ loginPage, loginData }) => {
+    test('Login successfully with valid user', async ({ loginPage, loginData, page }) => {
         await test.step('Login with valid credentials', async () => {
             await loginPage.loginAction(loginData.validUsername, loginData.validPassword);
         });
 
         await test.step('Verify the user is redirected to the inventory page', async () => {
-            await loginPage.assertInventoryPageVisible(loginData.dashboardUrl);
+            await expect(page).toHaveURL(loginData.dashboardUrl);
+            await expect(loginPage.productsTitle).toBeVisible()
         });
     });
 });
@@ -23,7 +28,8 @@ test.describe('Login with invalid credentials', () => {
         });
 
         await test.step('Verify the error message is displayed', async () => {
-            await loginPage.assertErrorMessageVisible(/Epic sadface/i);
+            await expect(loginPage.errorMessage).toContainText(/Epic sadface/i);
+            await expect(loginPage.username).toBeVisible();
         });
     });
 });
@@ -34,8 +40,9 @@ test.describe('Login with unusual account', () => {
             await loginPage.loginAction(loginData.lockOutUsername, loginData.validPassword);
         });
 
-        await test.step('Verify the locked out message is displayed', async () => {
-            await loginPage.assertErrorMessageVisible(/locked out/i);
+        await test.step('Verify the locked out message is displayed', async () => {          
+            await expect(loginPage.errorMessage).toContainText(/locked out/i);
+            await expect(loginPage.username).toBeVisible();
         });
     });
 });
