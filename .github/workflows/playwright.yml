@@ -12,7 +12,7 @@ jobs:
         BASE_URL: ${{ vars.BASE_URL }}
         INVENTORY_URL: ${{ vars.INVENTORY_URL }}
         USER_NAME: ${{ vars.USER_NAME }}
-        PASSWORD: ${{ vars.PASSWORD }}
+        PASSWORD: ${{ secrets.PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

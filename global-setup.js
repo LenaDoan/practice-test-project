@@ -16,7 +16,7 @@ async function globalSetup() {
   const loginData = getLoginData();
 
   await page.goto(process.env.BASE_URL);
-  await loginPage.loginAction(loginData.validUsername, loginData.validPassword);
+  await loginPage.loginAction(process.env.USER_NAME, process.env.PASSWORD);
   await expect(page).toHaveURL(loginData.dashboardUrl);
   await expect(loginPage.productsTitle).toBeVisible()
   await context.storageState({ path: authFile });
