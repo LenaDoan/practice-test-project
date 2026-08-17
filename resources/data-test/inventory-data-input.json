@@ -14,6 +14,5 @@
     "cartCounts": {
         "one": 1,
         "two": 2
-    },
-    "directInventoryUrl": "https://www.saucedemo.com/inventory.html"
+    }
 }

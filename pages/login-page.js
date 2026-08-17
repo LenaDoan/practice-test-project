@@ -13,6 +13,10 @@ export class LoginPage extends BasePage {
         this.errorMessage = this.page.locator('[data-test="error"]');
     }
 
+    async open(){
+        await this.page.goto("/");
+    }
+
     //Method
     async loginAction(username, pass) {
         await this.username.fill(username);

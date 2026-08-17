@@ -21,6 +21,10 @@ export class InventoryPage extends BasePage {
         this.usernameLabel = this.page.getByPlaceholder('Username');
     }
 
+    async open() {
+        await this.page.goto('/inventory.html');
+    }
+
     async addProductToCart(item1) {
         const addToCartButton = this.page.locator('.inventory_item').filter({ has: this.page.locator('.inventory_item_name', { hasText: item1 }) }).locator('[data-test^="add-to-cart-"]');
         await addToCartButton.first().click();

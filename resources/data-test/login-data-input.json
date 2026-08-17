@@ -1,6 +1,4 @@
 {
-    "loginUrl": "https://www.saucedemo.com/",
-    "dashboardUrl": "https://www.saucedemo.com/inventory.html",
     "validUsername": "standard_user",
     "validPassword": "secret_sauce",
     "invalidUsername": "Lena",

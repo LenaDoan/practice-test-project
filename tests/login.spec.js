@@ -4,8 +4,8 @@ import { test, expect } from "../fixtures/general-fixture.js";
 // Login specs need a logged-out context (ignore global auth storageState)
 test.use({ storageState: { cookies: [], origins: [] } });
 
-test.beforeEach('Navigate to the login page', async ({ page }) => {
-    await page.goto(process.env.BASE_URL);
+test.beforeEach('Navigate to the login page', async ({ loginPage}) => {
+    await loginPage.open();
 });
 
 test.describe('Happy path: Login success', () => {
@@ -15,7 +15,7 @@ test.describe('Happy path: Login success', () => {
         });
 
         await test.step('Verify the user is redirected to the inventory page', async () => {
-            await expect(page).toHaveURL(loginData.dashboardUrl);
+            await expect(page).toHaveURL('/inventory.html');
             await expect(loginPage.productsTitle).toBeVisible()
         });
     });

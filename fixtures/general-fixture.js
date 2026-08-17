@@ -2,6 +2,7 @@ import { test as base, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login-page.js';
 import { InventoryPage } from '../pages/inventory-page.js';
 import { getLoginData } from '../utils/data-loader.js';
+import { CartPage } from '../pages/cart-page.js';
 import { getInventoryData } from '../utils/data-loader.js';
 
 export const test = base.extend({
@@ -24,6 +25,11 @@ export const test = base.extend({
     inventoryPage: async ({ page }, use) => {
         const inventory = new InventoryPage(page);
         await use(inventory);
+    },
+
+    cartPage: async({page},use) =>{
+        const cart = new CartPage(page);
+        await use(cart);
     }
 })
 export { expect };

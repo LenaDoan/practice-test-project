@@ -1,11 +1,9 @@
 import path from 'path';
 import { test, expect } from '../fixtures/general-fixture.js';
 
-//const authFile = path.join(process.cwd(), 'playwright/.auth/inventory-auth.json');
 test.describe('Inventory page - UI in the inventory page', () => {
-   // test.use({ storageState: authFile });
-    test.beforeEach('Open the Sauce Demo inventory page', async ({ page }) => {
-        await page.goto(process.env.INVENTORY_URL);
+    test.beforeEach('Open the Sauce Demo inventory page', async ({ inventoryPage }) => {
+        await inventoryPage.open();
     });
 
     test('Verify the inventory page loads after a successful login', async ({ inventoryPage, page }) => {
@@ -145,7 +143,7 @@ test('Logout from the inventory page', async ({ inventoryPage, page, loginPage, 
     });
 
     await test.step('Verify the user is redirected to the login page', async () => {
-        await expect(page).toHaveURL(loginData.loginUrl);
+        await expect(page).toHaveURL('/');
         await expect(loginPage.username).toBeVisible();
     });
 });
@@ -163,7 +161,7 @@ test.describe('Inventory page - not loggin', () => {
     test.use({ storageState: { cookies: [], origins: [] } });
     test('Accessing the inventory page without login', async ({ inventoryPage, page, inventoryData }) => {
         await test.step('Open the inventory URL directly', async () => {
-            await page.goto(inventoryData.directInventoryUrl);
+            await page.goto('/inventory.html');
         });
 
         await test.step('Verify the user is redirected to the login experience', async () => {
